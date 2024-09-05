@@ -33,18 +33,27 @@ class Display {
     }
 
     imprimirValores() {
+        // Mostrar el valor actual redondeado en el display
         this.displayValorActual.textContent = this.valorActual;
-
+    
+        // Mostrar el valor anterior y el signo de operación
         this.displayValorAnterior.textContent = `${this.valorAnterior} ${this.signos[this.tipoOperacion] || ''}`;
     }
+    
 
     calcular() {
-        const valorAnterior = parseFloat(this.valorAnterior); // Revisar parseFloat
+        const valorAnterior = parseFloat(this.valorAnterior);
         const valorActual = parseFloat(this.valorActual);
-
-        if(isNaN(valorActual) || isNaN(valorAnterior)) return;
+    
+        if (isNaN(valorActual) || isNaN(valorAnterior)) return;
+    
+        // Realizar la operación usando el método correspondiente de la calculadora
         this.valorActual = this.calculador[this.tipoOperacion](valorAnterior, valorActual);
+    
+        // Redondear el resultado a 2 decimales
+        this.valorActual = this.valorActual.toFixed(2);
     }
+    
 
     computar(tipoOperacion) {
         this.tipoOperacion !== 'igual' && this.calcular();
